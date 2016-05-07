@@ -1,0 +1,40 @@
+<% include header %>
+
+<script type="text/javascript">
+	function initMap () {
+		var persons = <%-JSON.stringify(users) %>; 
+		console.log("In the map make function");
+		var map = new google.maps.Map(document.getElementById('map'), { 
+		center: new google.maps.LatLng(-34.397, 150.644),
+		zoom: 0,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	
+	});
+		persons.forEach(function (u) {
+			var ulatlng = new google.maps.LatLng(u.lat, u.lng);
+			var marker = new google.maps.Marker({
+				position: ulatlng,
+				map: map,
+				title: u.name
+			});
+		});
+}
+</script>
+
+  <h1><%-title %></h1>
+  <p>Hello <%-title %></p>
+
+<ol>
+	<% for (var i = 0; i < users.length; i++) { %>
+  		<li><%= users[i].name %> -- <%= users[i].ip %>
+  		 </li>
+  		 <p><%= users[i].lat %>, <%= users[i].lng %></p>
+	<% } %>
+</ol>
+
+<div id="map" ></div>
+<% include footer %>
+
+
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBK230fSFRfv7OuNhR9Tn3hSX9WywaaPUw&callback=initMap" >
+  </script>

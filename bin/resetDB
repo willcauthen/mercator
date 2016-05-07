@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+var r = require('rethinkdb');
+var db = require("../db");
+
+r.connect( { host: 'localhost', port: 28015 }).then(db.resetDB).then(function (){
+	process.exit();
+});
+	
