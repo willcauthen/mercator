@@ -1,10 +1,12 @@
-var express = require('express');
-var router = express.Router();
-var util = require('util');
-var r = require('rethinkdb');
-var b = require('bluebird');
-var Chance = require('chance');
-var chance = new Chance();
+var express = require('express'),
+	router = express.Router(),
+	util = require('util'),
+	r = require('rethinkdb'),
+	b = require('bluebird'),
+	Chance = require('chance'),
+	chance = new Chance(),
+	geocoder = require('node-geocoder')("freegeoip", "http");
+
 // secret api key!!
 // AIzaSyBK230fSFRfv7OuNhR9Tn3hSX9WywaaPUw
 
@@ -15,6 +17,11 @@ router.get('/', serveGetUsers);
 
 function serveGetUsers(request, response, next){
 	getUsers(request._rdb).then(function(users){
+		geocoder.geocode(getIP(request)).then(function (geo) {
+			console.log(geo);
+		}).catch(function(err) {
+			console.log(err);
+		});
 		response.render('index', { title: getIP(request), users: users });
 
 	}).finally(next);
