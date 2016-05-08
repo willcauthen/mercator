@@ -10,7 +10,7 @@ function initDB(connection) {
 			 .tableCreate('users')
 			 .run(connection).then(function(arg){
 
-				r.table('users').insert(genUsers(10)).run(connection);	
+				r.table('users').insert(genUsers(0)).run(connection);	
 			}).catch(function(error){
 				console.log(error);
 			});

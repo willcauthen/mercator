@@ -103,3 +103,8 @@
 2016-05-07T16:25:03.471776000 14042.642080s info: Table cab433df-7134-4307-94cb-9e41a5367c94: Starting a new Raft election for term 1.
 2016-05-07T16:25:03.472052000 14042.642356s info: Table cab433df-7134-4307-94cb-9e41a5367c94: Added replica on this server.
 2016-05-07T16:25:03.738459000 14042.908762s info: Table cab433df-7134-4307-94cb-9e41a5367c94: This server is Raft leader for term 1. Latest log index is 0.
+2016-05-07T17:36:40.615569000 18339.890366s notice: Removing file /Users/MacBookPro1/codes/mercatorProjet/rethinkdb_data/cab433df-7134-4307-94cb-9e41a5367c94
+2016-05-07T17:36:40.615583000 18339.890379s info: Table cab433df-7134-4307-94cb-9e41a5367c94: Deleted the table.
+2016-05-07T17:37:23.097946000 18382.373755s info: Table 3114f8da-e010-42aa-9c74-3f7281423e04: Starting a new Raft election for term 1.
+2016-05-07T17:37:23.098229000 18382.374038s info: Table 3114f8da-e010-42aa-9c74-3f7281423e04: Added replica on this server.
+2016-05-07T17:37:23.464822000 18382.740669s info: Table 3114f8da-e010-42aa-9c74-3f7281423e04: This server is Raft leader for term 1. Latest log index is 0.

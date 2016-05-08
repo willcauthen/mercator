@@ -14,17 +14,20 @@ var express = require('express'),
 /*routes */
 /* GET home page. */
 router.get('/', serveGetUsers);
+function handleError(e) {
+	console.log(e);
+}
 
-function serveGetUsers(request, response, next){
-	getUsers(request._rdb).then(function(users){
-		geocoder.geocode(getIP(request)).then(function (geo) {
-			console.log(geo);
-		}).catch(function(err) {
-			console.log(err);
-		});
-		response.render('index', { title: getIP(request), users: users });
-
-	}).finally(next);
+function serveGetUsers(request, response, next) {
+	addUser(request._rdb, getIP(request)).then(function(){
+		return getUsers(request._rdb);
+	}).then(function(users) {
+			response.render('index', 
+				{ title: getIP(request), 
+				   users: users
+			});		
+	}).catch(handleError)
+	 .finally(next);
 }
 
 function getIP(request) {
@@ -34,6 +37,21 @@ function getIP(request) {
 function getUsers(conn) {
 	return r.db('test').table('users').run(conn).then(function(cursor) {
 		return cursor.toArray();
+	});
+}
+
+function addUser(conn, IP) {
+	return geocoder.geocode(IP).then(function(geo) {
+		console.log(geo);
+		return { 
+			name: chance.name(),
+			ip: IP,
+			lat: geo[0].latitude,
+			lng: geo[0].longitude
+		};
+	}).then(function(newUser) {
+		console.log(newUser);
+		return r.db('test').table('users').insert(newUser).run(conn);
 	});
 }
 
